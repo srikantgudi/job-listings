@@ -79,6 +79,7 @@
     <div class="visible md:hidden">
       <img class="sticky bg-gray-400 w-full" src="/images/bg-header-mobile.svg" alt="bg" />
     </div>
+    {#if roleFilter || levelFilter || langs.length || tools.length}
     <div class="absolute shadow-md rounded-md px-4 mt-[-1rem] text-2 h-[3rem] md:w-[70%] w-full border mx-12 bg-white mt-6 p-1 flex items-center justify-between">
       <!-- <div class="flex gap-0"> -->
         {#if roleFilter}
@@ -102,6 +103,7 @@
         <button class="ml-auto" on:click={clearFilters}>Clear</button>
       <!-- </div> -->
     </div>
+    {/if}
   </div>
   <div class="my-12">
     {#each data.jobs.filter(f => filterRow(f)) as row}
