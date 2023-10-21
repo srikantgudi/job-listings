@@ -80,7 +80,7 @@
       <img class="sticky bg-gray-400 w-full" src="/images/bg-header-mobile.svg" alt="bg" />
     </div>
     {#if roleFilter || levelFilter || langs.length || tools.length}
-    <div class="absolute shadow-md rounded-md px-4 mt-[-1rem] text-2 h-[3rem] md:w-[70%] w-full border mx-12 bg-white mt-6 p-1 flex items-center justify-between">
+    <div class="absolute shadow-md rounded-md px-4 mt-[-20px] text-2 h-[3rem] md:w-[70%] w-full border mx-12 bg-white mt-6 p-1 flex items-center justify-between">
       <!-- <div class="flex gap-0"> -->
         {#if roleFilter}
           <div class="mr-1 px-2 flex gap-0"><span class="bg-gray-300 px-2 rounded-l-md">{roleFilter}</span><button on:click={() => roleFilter = ''} class="bg-teal-400 hover:bg-teal-600 px-2 text-white rounded-r-md">&times;</button></div>
