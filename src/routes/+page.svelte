@@ -110,15 +110,15 @@
           <img src={row.logo} alt="logo" />
         </div>
         <div class="w-1/2">
-          <div class="flex gap-1 gap-md-2 align-items-center">
-            <span class="text-xl mr-4">{row.company}</span>
-            {#if row.new}<span class="bg-teal-400 px-2 text-white rounded-2xl">New!</span>{/if}
-            {#if row.featured}<span class="bg-teal-800 px-2 text-white rounded-2xl">Featured</span>{/if}
+          <div class="flex gap-2 items-center">
+            <span class="text-xl ">{row.company}</span>
+            {#if row.new}<span class="text-sm uppercase bg-teal-400 p-1 px-2 text-white rounded-2xl">New!</span>{/if}
+            {#if row.featured}<span class="text-sm uppercase bg-teal-800 p-1 px-2 text-white rounded-2xl">Featured</span>{/if}
           </div>
-          <div class="fs-5 fw-bold">
+          <div class="font-bold">
             {row.position}
           </div>
-          <div class="d-flex gap-4 align-items-center">
+          <div class="flex gap-4 align-items-center">
             <span>{row.postedAt}</span> &bull; <span>{row.contract}</span> &bull; <span>{row.location}</span>
           </div>
         </div>
