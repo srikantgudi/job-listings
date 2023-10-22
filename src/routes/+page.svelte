@@ -50,20 +50,6 @@
 </script>
 
 <style>
-  main {
-    width: 1440px;
-    margin: 0 auto;
-  }
-  .job {
-    box-sizing: border-box;
-    display: grid;
-    grid-template-columns: 10% 50% auto;
-    gap: 1rem;
-    border: 1px solid #999;
-    border-radius: 0.5rem;
-    padding: 1rem 1rem 0 2rem;
-    width: 100%;
-  }
   @media screen and (max-width:375px) {
     .job {
       grid-template-columns: 1fr;
@@ -71,16 +57,16 @@
     }
   }
 </style>
-<main>
+<div class="invisible md:visible">
+  <img class="sticky mt-[-1rem] w-full bg-teal-800/[.5]" src="/images/bg-header-desktop.svg" alt="bg" />
+</div>
+<div class="visible md:hidden">
+  <img class="sticky bg-teal-800/[.5] w-full" src="/images/bg-header-mobile.svg" alt="bg" />
+</div>
+<main class="bg-[aliceblue] w-4/5 mx-auto">
   <div>
-    <div class="invisible md:visible">
-      <img class="sticky mt-[-1rem] bg-gray-400" src="/images/bg-header-desktop.svg" alt="bg" />
-    </div>
-    <div class="visible md:hidden">
-      <img class="sticky bg-gray-400 w-full" src="/images/bg-header-mobile.svg" alt="bg" />
-    </div>
     {#if roleFilter || levelFilter || langs.length || tools.length}
-    <div class="absolute shadow-md rounded-md px-4 mt-[-20px] text-2 h-[3rem] md:w-[70%] w-full border mx-12 bg-white mt-6 p-1 flex items-center justify-between">
+    <div class="absolute shadow-md rounded-md px-4 mt-[-4rem] text-2 h-[3rem] w-[80%] border bg-white mt-6 p-1 flex items-center justify-between">
       <!-- <div class="flex gap-0"> -->
         {#if roleFilter}
           <div class="mr-1 px-2 flex gap-0"><span class="bg-gray-300 px-2 rounded-l-md">{roleFilter}</span><button on:click={() => roleFilter = ''} class="bg-teal-400 hover:bg-teal-600 px-2 text-white rounded-r-md">&times;</button></div>
@@ -105,22 +91,22 @@
     </div>
     {/if}
   </div>
-  <div class="my-12">
+  <div class="my-10">
     {#each data.jobs.filter(f => filterRow(f)) as row}
-      <div class="flex gap-2 my-4 shadow-lg {row.featured ? 'border-l-4 border-teal-600': ''} p-4 rounded-l-lg">
-        <div class="mr-4">
-          <img src={row.logo} alt="logo" />
+      <div class="flex items-center gap-1 h-[6rem] bg-gray-100 my-4 shadow-lg {row.featured ? 'border-l-4 border-teal-600': ''} p-4 rounded-l-sm">
+        <div class="mx-2">
+          <img src={row.logo} width="50" alt="logo" align="middle" />
         </div>
-        <div class="w-1/2">
+        <div class="w-1/2 mr-8">
           <div class="flex gap-2 items-center">
-            <span class="text-xl ">{row.company}</span>
-            {#if row.new}<span class="text-sm uppercase bg-teal-400 p-1 px-2 text-white rounded-2xl">New!</span>{/if}
-            {#if row.featured}<span class="text-sm uppercase bg-teal-800 p-1 px-2 text-white rounded-2xl">Featured</span>{/if}
+            <span class="text-xs text-teal-800">{row.company}</span>
+            {#if row.new}<span class="text-[8px] uppercase bg-teal-600 p-[1px] px-2 text-white rounded-xl">New!</span>{/if}
+            {#if row.featured}<span class="text-[8px] uppercase bg-black p-[1px] px-2 text-white rounded-xl">Featured</span>{/if}
           </div>
-          <div class="font-bold">
+          <div class="font-bold text-sm">
             {row.position}
           </div>
-          <div class="flex gap-4 align-items-center">
+          <div class="flex gap-4 align-items-center text-xs text-gray-400">
             <span>{row.postedAt}</span> &bull; <span>{row.contract}</span> &bull; <span>{row.location}</span>
           </div>
         </div>
