@@ -93,7 +93,7 @@
   </div>
   <div class="my-10">
     {#each data.jobs.filter(f => filterRow(f)) as row}
-      <div class="flex items-center gap-1 h-[6rem] bg-gray-100 my-4 shadow-lg {row.featured ? 'border-l-4 border-teal-600': ''} p-4 rounded-l-sm">
+      <div class="flex items-center gap-1 h-[6rem] bg-gray-100 my-6 shadow-lg {row.featured ? 'border-l-4 border-l-teal-600': ''} p-4 rounded-l-sm">
         <div class="mx-2">
           <img src={row.logo} width="50" alt="logo" align="middle" />
         </div>
@@ -106,12 +106,12 @@
           <div class="font-bold text-sm">
             {row.position}
           </div>
-          <div class="flex gap-4 align-items-center text-xs text-gray-400">
+          <div class="flex gap-2 align-items-center text-[10px] font-bold text-slate-600">
             <span>{row.postedAt}</span> &bull; <span>{row.contract}</span> &bull; <span>{row.location}</span>
           </div>
         </div>
         <!-- tools, etc-->
-        <div class="flex gap-2 my-8">
+        <div class="flex gap-2 my-8 ml-auto">
           <button class="bg-slate-200 rounded-md px-2 text-teal-500 font-bold" on:click={setRoleFilter(row.role)}>{row.role}</button>
           <button class="bg-slate-200 rounded-md px-2 text-teal-500 font-bold" on:click={setLevelFilter(row.level)}>{row.level}</button>
           {#each row.languages as lang}
