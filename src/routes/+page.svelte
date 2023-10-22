@@ -4,8 +4,10 @@
   let levelFilter = '';
   let langs = [];
   let tools = [];
+  let hasFilter = true;
 
   const setRoleFilter = (role) => {
+    hasFilter = !hasFilter || true;
     roleFilter = role
   }
   const setLevelFilter = (level) => {
@@ -33,10 +35,7 @@
   }
 
   const clearFilters = () => {
-    levelFilter = '';
-    roleFilter = '';
-    langs = [];
-    tools = [];
+    hasFilter = false;
   }
 
   $: filterRow = (f) => {
@@ -50,50 +49,67 @@
 </script>
 
 <style>
+  header {
+    position: sticky;
+    background: url(images/bg-header-desktop.svg) no-repeat 50% 50% #099;
+    background-size: cover;
+    height: 8rem;
+  }
+  main {
+    position: absolute;
+    top: 20%;
+    left: 12.5%;
+    width: 1440px;
+    margin: 0 auto;
+  }
+  .filter-nav {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top: -1rem;
+    width: 1440px;
+    margin: auto;
+    padding: 1rem;
+    background-color: aliceblue;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 0 4px #999;
+    border-radius: 0.5rem;
+    background-color: none;
+  }
   @media screen and (max-width:375px) {
-    .job {
-      grid-template-columns: 1fr;
-      width: 100%;
-    }
   }
 </style>
-<div class="invisible md:visible">
-  <img class="sticky mt-[-1rem] w-full bg-teal-800/[.5]" src="/images/bg-header-desktop.svg" alt="bg" />
-</div>
-<div class="visible md:hidden">
-  <img class="sticky bg-teal-800/[.5] w-full" src="/images/bg-header-mobile.svg" alt="bg" />
-</div>
-<main class="bg-[aliceblue] w-4/5 mx-auto">
-  <div>
-    {#if roleFilter || levelFilter || langs.length || tools.length}
-    <div class="absolute shadow-md rounded-md px-4 mt-[-4rem] text-2 h-[3rem] w-[80%] border bg-white mt-6 p-1 flex items-center justify-between">
-      <!-- <div class="flex gap-0"> -->
-        {#if roleFilter}
-          <div class="mr-1 px-2 flex gap-0"><span class="bg-gray-300 px-2 rounded-l-md">{roleFilter}</span><button on:click={() => roleFilter = ''} class="bg-teal-400 hover:bg-teal-600 px-2 text-white rounded-r-md">&times;</button></div>
-        {/if}
-        {#if levelFilter}
-        <div class="mr-1 px-2 flex gap-0"><span class="bg-gray-300 px-2 rounded-l-md">{levelFilter}</span> <button on:click={() => levelFilter = ''} class="bg-teal-400 hover:bg-teal-600 px-2 text-white rounded-r-md">&times;</button></div>
-        {/if}
-        {#if langs.length}
-          {#each langs as l}
-          <div class="mr-2 px-2 flex gap-0"><span class="bg-gray-300 px-2 rounded-l-md">{l}</span> <button on:click={() => clearLang(l)} class="bg-teal-400 hover:bg-teal-600 px-2 text-white rounded-r-md">&times;</button></div>
-          {/each}
-        {/if}
-        {#if tools.length}
-          {#each tools as t}
-          <div class="mr-2">{t} ?<button on:click={() => clearTool(t)} class="btn btn-sm rounded">&times;</button></div>
-          {/each}
-        {/if}
-      <!-- </div>
-      <div class="ml-auto"> -->
-        <button class="ml-auto" on:click={clearFilters}>Clear</button>
-      <!-- </div> -->
-    </div>
+<header>
+  &nbsp;
+</header>
+{#if hasFilter}
+<div class="filter-nav">
+  <!-- <div class="flex gap-0"> -->
+    {#if roleFilter}
+      <div class="mr-1 px-2 flex gap-0"><span class="bg-gray-300 px-2 rounded-l-md">{roleFilter}</span><button on:click={() => roleFilter = ''} class="bg-teal-400 hover:bg-teal-600 px-2 text-white rounded-r-md">&times;</button></div>
     {/if}
-  </div>
-  <div class="my-10">
+    {#if levelFilter}
+    <div class="mr-1 px-2 flex gap-0"><span class="bg-gray-300 px-2 rounded-l-md">{levelFilter}</span> <button on:click={() => levelFilter = ''} class="bg-teal-400 hover:bg-teal-600 px-2 text-white rounded-r-md">&times;</button></div>
+    {/if}
+    {#if langs.length}
+      {#each langs as l}
+      <div class="mr-2 px-2 flex gap-0"><span class="bg-gray-300 px-2 rounded-l-md">{l}</span> <button on:click={() => clearLang(l)} class="bg-teal-400 hover:bg-teal-600 px-2 text-white rounded-r-md">&times;</button></div>
+      {/each}
+    {/if}
+    {#if tools.length}
+      {#each tools as t}
+      <div class="mr-2">{t} ?<button on:click={() => clearTool(t)} class="btn btn-sm rounded">&times;</button></div>
+      {/each}
+    {/if}
+    <button class="ml-auto" on:click={clearFilters}>Clear</button>
+</div>
+{/if}
+<main>
+  <div class="job-list">
     {#each data.jobs.filter(f => filterRow(f)) as row}
-      <div class="flex items-center gap-1 h-[6rem] bg-gray-100 my-6 shadow-lg {row.featured ? 'border-l-4 border-l-teal-600': ''} p-4 rounded-l-sm">
+      <div class="flex items-center gap-1 h-[8rem] mb-4 bg-gray-100 shadow-lg {row.featured ? 'border-l-4 border-l-teal-600': ''} p-4 rounded-l-sm">
         <div class="mx-2">
           <img src={row.logo} width="50" alt="logo" align="middle" />
         </div>
